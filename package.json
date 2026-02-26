@@ -1,0 +1,21 @@
+{
+  "name": "dio-copilot-exercise",
+  "version": "1.0.0",
+  "description": "Automation Orchestration API for DIO exercise",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "vitest run",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "Matheus Menezes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "latest"
+  },
+  "devDependencies": {
+    "supertest": "latest",
+    "vitest": "latest"
+  }
+}
