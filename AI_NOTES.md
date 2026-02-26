@@ -1,23 +1,23 @@
-# AI Copilot Notes - Automation Orchestration API
+# Notas do Copilot - API de Orquestração de Automação
 
-## Goal
-Implement a backend feature that simulates an automation orchestration flow (n8n style) with AI enrichment, satisfying the DIO "My First Copilot" exercise requirements.
+## Objetivo
+Implementar uma funcionalidade de backend que simula um fluxo de orquestração de automação (estilo n8n) com enriquecimento por IA, atendendo aos requisitos do exercício "My First Copilot" da DIO.
 
-## How AI helped
-- **Architectural Alignment**: The AI identified the user's focus on Backend/Automation and suggested pivoting from a generic API to an "Automation Job" orchestrator.
-- **Node.js Best Practices**: Suggested using ESM (`import/export`), `vitest` for testing, and `crypto.randomUUID()` for modern ID generation.
-- **Logic Design**: Proposed a middleware-like enrichment step to simulate AI metadata enhancement within the flow.
-- **Error Handling**: Suggested standard HTTP status codes (201, 400, 500) and structured error responses.
+## Como a IA ajudou
+- **Alinhamento Arquitetural**: A IA identificou o foco do usuário em Backend/Automação e sugeriu mudar de uma API genérica para um orquestrador de "Jobs de Automação".
+- **Boas Práticas de Node.js**: Sugeriu o uso de ESM (`import/export`), `vitest` para testes e `crypto.randomUUID()` para geração moderna de IDs.
+- **Design da Lógica**: Propôs uma etapa de enriquecimento (estilo middleware) para simular o aprimoramento de metadados por IA dentro do fluxo.
+- **Tratamento de Erros**: Sugeriu códigos de status HTTP padrão (201, 400, 500) e respostas de erro estruturadas.
 
-## What I changed manually (Simulated Dev Feedback)
-- Refined the `orchestration_metadata` to include specific fields like `confidence_score`.
-- Ensured the `data` directory is created recursively to prevent FS errors in production environments.
+## O que eu alterei manualmente (Feedback de Desenvolvedor)
+- Refinei os `orchestration_metadata` para incluir campos específicos como `confidence_score`.
+- Garanti que o diretório `data` seja criado recursivamente para evitar erros de sistema de arquivos em diferentes ambientes.
 
-## Validation
-- **Automated Tests**: Ran `npm test` using Vitest and Supertest.
-- **Manual Verification**: Triggered a mock job via `curl` to verify `db.json` persistence.
+## Validação
+- **Testes Automatizados**: Execução do comando `npm test` utilizando Vitest e Supertest.
+- **Verificação Manual**: Chamada ao endpoint via `curl` para validar a persistência no arquivo `db.json`.
 
-## Commit Proof
+## Histórico de Commits (Exemplos)
 - `chore: init project and automation framework`
 - `feat: implement jobs/process orchestration endpoint`
 - `test: verify ai-enrichment flow logic`
