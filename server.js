@@ -10,12 +10,12 @@ const DB_PATH = path.join(__dirname, 'data', 'db.json');
 const app = express();
 app.use(express.json());
 
-// Simulation of AI/Automation Processing Logic
+// Simulação da lógica de processamento de automação com IA
 const enrichJob = (job) => {
   return {
     ...job,
     id: crypto.randomUUID(),
-    status: 'completed',
+    status: 'concedido',
     processed_at: new Date().toISOString(),
     orchestration_metadata: {
       engine: 'copilot-orchestrator',
@@ -31,31 +31,31 @@ app.post('/jobs/process', async (req, res) => {
     const { task, payload } = req.body;
 
     if (!task || !payload) {
-      return res.status(400).json({ error: 'Missing task or payload' });
+      return res.status(400).json({ error: 'Tarefa ou payload ausentes' });
     }
 
     const processedJob = enrichJob({ task, payload });
 
-    // Ensure data directory exists (robustness)
+    // Garante que o diretório de dados existe (robustez)
     await fs.mkdir(path.join(__dirname, 'data'), { recursive: true });
 
-    // Persistence logic
+    // Lógica de persistência
     let jobs = [];
     try {
       const data = await fs.readFile(DB_PATH, 'utf-8');
       jobs = JSON.parse(data);
     } catch (e) {
-      // File doesn't exist yet, start with empty array
+      // O arquivo ainda não existe, começa com um array vazio
     }
 
     jobs.push(processedJob);
     await fs.writeFile(DB_PATH, JSON.stringify(jobs, null, 2));
 
-    console.log(`[Copilot] Job processed: ${processedJob.id}`);
+    console.log(`[Copilot] Job processado: ${processedJob.id}`);
     res.status(201).json(processedJob);
   } catch (error) {
-    console.error('[Error]', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('[Erro]', error);
+    res.status(500).json({ error: 'Erro Interno do Servidor' });
   }
 });
 
@@ -65,7 +65,7 @@ export default app;
 if (process.env.NODE_ENV !== 'test') {
   const PORT = 3000;
   app.listen(PORT, () => {
-    console.log(`🚀 Automation Engine running at http://localhost:${PORT}`);
+    console.log(`🚀 Motor de Automação rodando em http://localhost:${PORT}`);
     console.log(`Endpoint: POST /jobs/process`);
   });
 }

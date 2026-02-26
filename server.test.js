@@ -9,18 +9,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DB_PATH = path.join(__dirname, 'data', 'db.json');
 
-describe('Automation Orchestration API', () => {
+describe('API de Orquestração de Automação', () => {
 
     beforeEach(async () => {
-        // Clear the database before each test
+        // Limpa o banco de dados antes de cada teste
         try {
             await fs.writeFile(DB_PATH, JSON.stringify([]));
         } catch (e) {
-            // Directory might not exist, that's fine
+            // Diretório pode não existir, sem problemas
         }
     });
 
-    it('should process a job and return enriched metadata', async () => {
+    it('deve processar um job e retornar metadados enriquecidos', async () => {
         const payload = {
             task: 'summarize_logs',
             payload: { logs: ['error at line 10', 'warning at line 15'] }
@@ -36,12 +36,12 @@ describe('Automation Orchestration API', () => {
         expect(response.body.orchestration_metadata.engine).toBe('copilot-orchestrator');
     });
 
-    it('should return 400 if payload is missing', async () => {
+    it('deve retornar 400 se o payload estiver ausente', async () => {
         const response = await request(app)
             .post('/jobs/process')
             .send({ task: 'only_task' });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('Missing task or payload');
+        expect(response.body.error).toBe('Tarefa ou payload ausentes');
     });
 });
